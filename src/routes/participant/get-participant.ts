@@ -14,6 +14,8 @@ export async function getParticipant(server: FastifyInstance) {
           tripId: z.string().uuid(),
           participantId: z.string().uuid(),
         }),
+        summary: 'get an specific participant from a trip',
+        tags: ['participants'],
       },
     },
     async (request, reply) => {

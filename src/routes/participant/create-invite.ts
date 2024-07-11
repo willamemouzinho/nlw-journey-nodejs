@@ -25,6 +25,8 @@ export async function createInvite(server: FastifyInstance) {
             participantId: z.string().uuid(),
           }),
         },
+        summary: 'send an invite to a trip participant',
+        tags: ['participants'],
       },
     },
     async (request, reply) => {

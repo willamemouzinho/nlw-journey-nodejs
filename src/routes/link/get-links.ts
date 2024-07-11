@@ -13,6 +13,8 @@ export async function getLinks(server: FastifyInstance) {
         params: z.object({
           tripId: z.string().uuid(),
         }),
+        summary: 'get links from a trip',
+        tags: ['links'],
       },
     },
     async (request, reply) => {

@@ -1,6 +1,9 @@
 import fastify from 'fastify'
 import fastifyCors from '@fastify/cors'
+import fastifySwagger from '@fastify/swagger'
+import fastifySwaggerUI from '@fastify/swagger-ui'
 import {
+  jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
@@ -27,6 +30,22 @@ async function main() {
   // config
   server.register(fastifyCors, {
     origin: env.WEB_BASE_URL,
+  })
+  server.register(fastifySwagger, {
+    swagger: {
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      info: {
+        title: 'plann.er',
+        description:
+          'Especificações da API para o back-end da aplicação plann.er construída durante o NLW Journey da Rocketseat.',
+        version: '1.0.0',
+      },
+    },
+    transform: jsonSchemaTransform,
+  })
+  server.register(fastifySwaggerUI, {
+    routePrefix: '/api/v1/docs',
   })
   server.setValidatorCompiler(validatorCompiler)
   server.setSerializerCompiler(serializerCompiler)

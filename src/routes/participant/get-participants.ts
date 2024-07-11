@@ -13,6 +13,8 @@ export async function getParticipants(server: FastifyInstance) {
         params: z.object({
           tripId: z.string().uuid(),
         }),
+        summary: 'get participants from a trip',
+        tags: ['participants'],
       },
     },
     async (request, reply) => {

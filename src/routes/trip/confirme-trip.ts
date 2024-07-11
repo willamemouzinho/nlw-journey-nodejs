@@ -17,6 +17,8 @@ export async function confirmTrip(server: FastifyInstance) {
         params: z.object({
           tripId: z.string().uuid(),
         }),
+        summary: 'confirms the trip creation',
+        tags: ['trips'],
       },
     },
     async (request, reply) => {

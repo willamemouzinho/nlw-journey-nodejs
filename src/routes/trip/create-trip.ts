@@ -27,6 +27,8 @@ export async function createTrip(server: FastifyInstance) {
             tripId: z.string().uuid(),
           }),
         },
+        summary: 'create an trip',
+        tags: ['trips'],
       },
     },
     async (request, reply) => {

@@ -22,6 +22,8 @@ export async function createLink(server: FastifyInstance) {
             linkId: z.string().uuid(),
           }),
         },
+        summary: 'create an link from a trip',
+        tags: ['links'],
       },
     },
     async (request, reply) => {

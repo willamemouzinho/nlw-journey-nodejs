@@ -14,6 +14,8 @@ export async function getActivities(server: FastifyInstance) {
         params: z.object({
           tripId: z.string().uuid(),
         }),
+        summary: 'get activities from a trip',
+        tags: ['activities'],
       },
     },
     async (request, reply) => {

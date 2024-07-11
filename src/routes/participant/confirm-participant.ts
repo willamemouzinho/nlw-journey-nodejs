@@ -14,6 +14,8 @@ export async function confirmParticipant(server: FastifyInstance) {
         params: z.object({
           participantId: z.string().uuid(),
         }),
+        summary: 'confirm an participant from a trip',
+        tags: ['participants'],
       },
     },
     async (request, reply) => {

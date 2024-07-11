@@ -23,6 +23,8 @@ export async function createActivity(server: FastifyInstance) {
             activityId: z.string().uuid(),
           }),
         },
+        summary: 'create an activity from a trip',
+        tags: ['activities'],
       },
     },
     async (request, reply) => {
