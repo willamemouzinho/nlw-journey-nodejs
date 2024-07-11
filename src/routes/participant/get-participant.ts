@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify'
-import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
+import { ZodTypeProvider } from 'fastify-type-provider-zod'
 
-import { prisma } from '../lib/prisma'
-import { ClientError } from '../errors/client-error'
+import { prisma } from '../../lib/prisma'
+import { ClientError } from '../../errors/client-error'
 
 export async function getParticipant(server: FastifyInstance) {
   server.withTypeProvider<ZodTypeProvider>().get(
@@ -18,6 +18,7 @@ export async function getParticipant(server: FastifyInstance) {
     },
     async (request, reply) => {
       const { tripId, participantId } = request.params
+
       const [trip, participant] = await Promise.all([
         prisma.trip.findUnique({
           where: { id: tripId },
@@ -26,7 +27,6 @@ export async function getParticipant(server: FastifyInstance) {
           where: { id: participantId },
           select: {
             id: true,
-            name: true,
             email: true,
             is_confirmed: true,
           },

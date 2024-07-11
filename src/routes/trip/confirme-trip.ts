@@ -1,13 +1,13 @@
 import { FastifyInstance } from 'fastify'
-import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { dayjs } from '../lib/dayjs'
+import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import nodemailer from 'nodemailer'
 
-import { prisma } from '../lib/prisma'
-import { getMailClient } from '../lib/mail'
-import { ClientError } from '../errors/client-error'
-import { env } from '../env'
+import { dayjs } from '../../lib/dayjs'
+import { prisma } from '../../lib/prisma'
+import { getMailClient } from '../../lib/mail'
+import { ClientError } from '../../errors/client-error'
+import { env } from '../../env'
 
 export async function confirmTrip(server: FastifyInstance) {
   server.withTypeProvider<ZodTypeProvider>().get(
@@ -40,7 +40,6 @@ export async function confirmTrip(server: FastifyInstance) {
       })
 
       const mail = await getMailClient()
-
       const formattedStartDate = dayjs(trip.starts_at).format('LL')
       const formattedEndDate = dayjs(trip.ends_at).format('LL')
 
@@ -69,8 +68,7 @@ export async function confirmTrip(server: FastifyInstance) {
             <a href="${confirmationLink}">Confirmar viagem</a>
             <!-- <br /> -->
             <p>
-            Caso você não saiba do que se trata esse e-mail, apenas ignore esse
-            e-mail.
+            Caso você não saiba do que se trata esse e-mail, apenas ignore.
             </p>
             </div>
             `.trim(),

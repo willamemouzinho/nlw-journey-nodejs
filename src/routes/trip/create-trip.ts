@@ -3,11 +3,11 @@ import { z } from 'zod'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import nodemailer from 'nodemailer'
 
-import { dayjs } from '../lib/dayjs'
-import { prisma } from '../lib/prisma'
-import { getMailClient } from '../lib/mail'
-import { env } from '../env'
-import { ClientError } from '../errors/client-error'
+import { dayjs } from '../../lib/dayjs'
+import { prisma } from '../../lib/prisma'
+import { getMailClient } from '../../lib/mail'
+import { env } from '../../env'
+import { ClientError } from '../../errors/client-error'
 
 export async function createTrip(server: FastifyInstance) {
   server.withTypeProvider<ZodTypeProvider>().post(
@@ -38,6 +38,7 @@ export async function createTrip(server: FastifyInstance) {
         owner_email,
         emails_to_invite,
       } = request.body
+
       if (dayjs(starts_at).isBefore(new Date())) {
         throw new ClientError('Invalid trip start date.')
       }
@@ -69,7 +70,6 @@ export async function createTrip(server: FastifyInstance) {
       })
 
       const mail = await getMailClient()
-
       const formattedStartDate = dayjs(starts_at).format('LL')
       const formattedEndDate = dayjs(ends_at).format('LL')
       const confirmationLink = `${env.API_BASE_URL}/api/v1/trips/${trip.id}/confirm`
@@ -98,8 +98,7 @@ export async function createTrip(server: FastifyInstance) {
             <a href="${confirmationLink}">Confirmar viagem</a>
             <!-- <br /> -->
             <p>
-              Caso você não saiba do que se trata esse e-mail, apenas ignore esse
-              e-mail.
+              Caso você não saiba do que se trata esse e-mail, apenas ignore.
             </p>
           </div>
         `.trim(),
