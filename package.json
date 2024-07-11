@@ -1,14 +1,14 @@
 {
   "name": "nlw-journey-nodejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Back-end da aplicação desenvolvida durante o NLW Journey da Rocketseat.",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/server.ts",
     "db:push": "prisma db push"
   },
   "keywords": [],
-  "author": "",
+  "author": "Willame Mouzinho",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.14.10",
