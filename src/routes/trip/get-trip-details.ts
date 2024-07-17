@@ -24,6 +24,7 @@ export async function getTripDetails(server: FastifyInstance) {
         where: { id: tripId },
         select: {
           id: true,
+          destination: true,
           starts_at: true,
           ends_at: true,
           is_confirmed: true,
